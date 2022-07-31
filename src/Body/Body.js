@@ -1,3 +1,4 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FirstPage from "./FirstPage";
 import SecondPage from "./SecondPage";
 import ThirdPage from "./ThirdPage";
@@ -6,14 +7,17 @@ import FourthPage from "./FourthPage";
 export default function Body() {
   return (
     <>
-      {/*  
-        <FirstPage />            
- */}
-      {/* <SecondPage /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<FirstPage />} />
 
-      {/* <ThirdPage /> */}
+          <Route path="/sessoes/:idFilme" element={<SecondPage />} />
 
-      <FourthPage />
+          <Route path="/seats" element={<ThirdPage />} />
+
+          <Route path="/success" element={<FourthPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

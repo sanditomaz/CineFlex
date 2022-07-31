@@ -2,8 +2,11 @@ import StyledTitle from "../Styles/StyledTitle";
 import DateContainer from "../Styles/DateContainer";
 import Page2Footer from "../Footer/Page2Footer";
 import StyledBody from "../Styles/StyledBody";
+import { useParams } from "react-router-dom";
 
 export default function SecondPage() {
+  const { idFilme } = useParams();
+  console.log(idFilme);
   return (
     <>
       <StyledBody>
@@ -44,7 +47,7 @@ export default function SecondPage() {
           </div>
         </DateContainer>
       </StyledBody>
-      <Page2Footer />
+      <Page2Footer idFilme={idFilme} />
     </>
   );
 }

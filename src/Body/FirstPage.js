@@ -1,38 +1,40 @@
 import StyledTitle from "../Styles/StyledTitle";
 import StyledContainer from "../Styles/StyledContainer";
 import StyledBody from "../Styles/StyledBody";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function FirstPage() {
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    const promise = axios.get(
+      "https://mock-api.driven.com.br/api/v7/cineflex/movies"
+    );
+
+    promise.then((res) => {
+      setItems(res.data);
+    });
+  }, []);
+
+  if (items === null) {
+    return <img src="https://bit.ly/3cVOjK1" />;
+  }
+
   return (
     <StyledBody>
       <StyledTitle>
         <h1>Selecione o Filme</h1>
       </StyledTitle>
       <StyledContainer>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
-        <div>
-          <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
-        </div>
+        {items.map((item) => (
+          <Link to={`/sessoes/${item.id}`} key={item.id}>
+            <div>
+              <img src={item.posterURL} alt={item.title} id={item.id} />
+            </div>
+          </Link>
+        ))}
       </StyledContainer>
     </StyledBody>
   );

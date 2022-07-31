@@ -1,6 +1,7 @@
 import Styled2Footer from "../Styles/Styled2Footer";
 
-export default function Page2Footer() {
+export default function Page2Footer(idFilme) {
+  console.log(idFilme.idFilme);
   return (
     <Styled2Footer>
       <div>

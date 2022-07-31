@@ -8,6 +8,7 @@ const StyledContainer = styled.div`
   flex-wrap: wrap;
   background-color: #ffffff;
   gap: 30px;
+  padding-bottom: 20px;
 
   div {
     width: 145px;
