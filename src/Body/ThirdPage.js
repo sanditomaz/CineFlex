@@ -10,8 +10,6 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function ThirdPage() {
-  const [color, setColor] = useState("#c3cfd9");
-  const [borderColor, setBorderColor] = useState("#808F9D");
   const { idSessao } = useParams();
   const [items, setItems] = useState(null);
 
@@ -28,16 +26,6 @@ export default function ThirdPage() {
     return "Loading";
   }
 
-  function selectSeat() {
-    if (color === "#c3cfd9") {
-      setColor("#8DD7CF");
-      setBorderColor("#45BDB0");
-    } else {
-      setColor("#c3cfd9");
-      setBorderColor("#808F9D");
-    }
-  }
-
   return (
     <StyledBody>
       <StyledTitle>
@@ -45,27 +33,13 @@ export default function ThirdPage() {
       </StyledTitle>
       <SeatsContainer>
         <div>
-          {items.seats.map((item, index) => {
-            return item.isAvailable ? (
-              <StyledChooseSeat
-                onClick={selectSeat}
-                key={index}
-                color={color}
-                borderColor={borderColor}
-              >
-                <h3>{item.name}</h3>
-              </StyledChooseSeat>
-            ) : (
-              <StyledChooseSeat
-                onClick={() => alert("Esse assento não está disponível")}
-                key={index}
-                color="#FBE192"
-                borderColor="#F7C52B"
-              >
-                <h3>{item.name}</h3>
-              </StyledChooseSeat>
-            );
-          })}
+          {items.seats.map((item, index) => (
+            <RenderSeats
+              key={index}
+              seats={item.isAvailable}
+              name={item.name}
+            />
+          ))}
         </div>
         <SeatsAvailable />
       </SeatsContainer>
@@ -78,5 +52,42 @@ export default function ThirdPage() {
         time={items.name}
       />
     </StyledBody>
+  );
+}
+
+function RenderSeats({ seats, name }) {
+  const [color, setColor] = useState("#c3cfd9");
+  const [borderColor, setBorderColor] = useState("#808F9D");
+
+  function selectSeat() {
+    if (color === "#c3cfd9") {
+      setColor("#8DD7CF");
+      setBorderColor("#45BDB0");
+    } else {
+      setColor("#c3cfd9");
+      setBorderColor("#808F9D");
+    }
+  }
+
+  return (
+    <>
+      {seats ? (
+        <StyledChooseSeat
+          onClick={selectSeat}
+          color={color}
+          borderColor={borderColor}
+        >
+          <h3>{name}</h3>
+        </StyledChooseSeat>
+      ) : (
+        <StyledChooseSeat
+          onClick={() => alert("Esse assento não está disponível")}
+          color="#FBE192"
+          borderColor="#F7C52B"
+        >
+          <h3>{name}</h3>
+        </StyledChooseSeat>
+      )}
+    </>
   );
 }
