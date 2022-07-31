@@ -3,10 +3,28 @@ import DateContainer from "../Styles/DateContainer";
 import Page2Footer from "../Footer/Page2Footer";
 import StyledBody from "../Styles/StyledBody";
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function SecondPage() {
   const { idFilme } = useParams();
-  console.log(idFilme);
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    const promise = axios.get(
+      `https://mock-api.driven.com.br/api/v7/cineflex/movies/${idFilme}/showtimes`
+    );
+
+    promise.then((res) => {
+      setItems(res.data);
+    });
+  }, []);
+
+  if (items === null) {
+    return <img src="https://bit.ly/3cVOjK1" alt="Loading" />;
+  }
+  console.log(items);
   return (
     <>
       <StyledBody>
@@ -14,40 +32,23 @@ export default function SecondPage() {
           <h1>Selecione o Horário</h1>
         </StyledTitle>
         <DateContainer>
-          <div>
-            <h2>Quinta-feira - 24/06/2021</h2>
-            <div>
-              <div>15:00</div>
-              <div>03:00</div>
+          {items.days.map((item, index) => (
+            <div key={item.id}>
+              <h2>
+                {item.weekday} - {item.date}
+              </h2>
+              <div>
+                {item.showtimes.map((subitem, index) => (
+                  <Link to={`/assentos/${subitem.id}`} key={subitem.id}>
+                    <div key={index}>{subitem.name}</div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div>
-            <h2>Quinta-feira - 24/06/2021</h2>
-            <div>
-              <div>15:00</div>
-              <div>03:00</div>
-            </div>
-          </div>
-
-          <div>
-            <h2>Quinta-feira - 24/06/2021</h2>
-            <div>
-              <div>15:00</div>
-              <div>03:00</div>
-            </div>
-          </div>
-
-          <div>
-            <h2>Quinta-feiraaaaaaaaaaa - 24/06/2021</h2>
-            <div>
-              <div>15:00</div>
-              <div>03:00</div>
-            </div>
-          </div>
+          ))}
         </DateContainer>
       </StyledBody>
-      <Page2Footer idFilme={idFilme} />
+      <Page2Footer title={items.title} url={items.posterURL} />
     </>
   );
 }

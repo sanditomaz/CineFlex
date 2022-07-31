@@ -1,13 +1,13 @@
 import Styled2Footer from "../Styles/Styled2Footer";
 
-export default function Page2Footer(idFilme) {
-  console.log(idFilme.idFilme);
+export default function Page2Footer({ title, url }) {
+  console.log(url);
   return (
     <Styled2Footer>
       <div>
-        <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
+        <img src={url} alt={title} />
       </div>
-      <h1>Punisher Henola Holmes</h1>
+      <h1>{title}</h1>
     </Styled2Footer>
   );
 }

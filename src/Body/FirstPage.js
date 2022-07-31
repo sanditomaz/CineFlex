@@ -19,7 +19,7 @@ export default function FirstPage() {
   }, []);
 
   if (items === null) {
-    return <img src="https://bit.ly/3cVOjK1" />;
+    return <img src="https://bit.ly/3cVOjK1" alt="Loading" />;
   }
 
   return (

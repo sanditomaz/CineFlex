@@ -4,7 +4,10 @@ export default function Page3Footer() {
   return (
     <Styled3Footer>
       <div>
-        <img src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg" />
+        <img
+          src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg"
+          alt="kk"
+        />
       </div>
 
       <section>

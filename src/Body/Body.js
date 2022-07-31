@@ -13,9 +13,9 @@ export default function Body() {
 
           <Route path="/sessoes/:idFilme" element={<SecondPage />} />
 
-          <Route path="/seats" element={<ThirdPage />} />
+          <Route path="/assentos/:idSessao" element={<ThirdPage />} />
 
-          <Route path="/success" element={<FourthPage />} />
+          <Route path="/sucesso" element={<FourthPage />} />
         </Routes>
       </BrowserRouter>
     </>

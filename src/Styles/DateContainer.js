@@ -28,6 +28,10 @@ const DateContainer = styled.div`
       justify-content: flex-start;
       flex-wrap: wrap;
       gap: 8px;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+      }
 
       div {
         width: 83px;
