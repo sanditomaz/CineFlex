@@ -4,6 +4,7 @@ import StyledBody from "../Styles/StyledBody";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import LoadingImg from "../Styles/LoadingImg";
 
 export default function FirstPage() {
   const [items, setItems] = useState(null);
@@ -19,7 +20,11 @@ export default function FirstPage() {
   }, []);
 
   if (items === null) {
-    return <img src="https://bit.ly/3cVOjK1" alt="Loading" />;
+    return (
+      <LoadingImg>
+        <img src="https://bit.ly/3S8He93" alt="Loading" />
+      </LoadingImg>
+    );
   }
 
   return (

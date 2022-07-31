@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
-  width: 100%;
+  width: 98%;
   display: flex;
   align-items: center;
   justify-content: center;

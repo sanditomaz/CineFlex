@@ -10,6 +10,7 @@ const SeatsContainer = styled.div`
   background-color: #ffffff;
 
   div {
+    max-width: 375px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,26 +21,6 @@ const SeatsContainer = styled.div`
       font-size: 11px;
       font-weight: 400;
       color: #000000;
-    }
-  }
-
-  section {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 16px;
-    gap: 30px;
-    padding-top: 15px;
-    flex-wrap: wrap;
-    div {
-      flex-direction: column;
-
-      h4 {
-        font-size: 13px;
-        font-weight: 400;
-        color: #4e5a65;
-      }
     }
   }
 `;

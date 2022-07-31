@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 const DateContainer = styled.div`
-  width: 100%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex-wrap: wrap;
   background-color: #ffffff;
-  padding-left: 20px;
+  padding-left: 50px;
 
   div {
     margin-bottom: 10px;

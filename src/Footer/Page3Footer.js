@@ -1,18 +1,18 @@
 import Styled3Footer from "../Styles/Styled3Footer";
 
-export default function Page3Footer() {
+export default function Page3Footer({ url, title, day, time }) {
   return (
     <Styled3Footer>
       <div>
-        <img
-          src="https://m.media-amazon.com/images/M/MV5BMjI5NjcwMTQxMV5BMl5BanBnXkFtZTcwODg5ODkwNQ@@._V1_.jpg"
-          alt="kk"
-        />
+        <img src={url} alt={title} />
       </div>
 
       <section>
-        <h1>Punisher Henola Holmes</h1>
-        <h1> Quinta-feira - 15:00</h1>
+        <h1>{title}</h1>
+        <h1>
+          {" "}
+          {day} - {time}
+        </h1>
       </section>
     </Styled3Footer>
   );

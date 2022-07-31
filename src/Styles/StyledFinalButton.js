@@ -5,6 +5,7 @@ const StyledFinalButton = styled.nav`
   align-items: center;
   justify-content: center;
   padding-top: 80px;
+  cursor: pointer;
 
   button {
     min-width: 225px;

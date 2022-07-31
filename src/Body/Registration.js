@@ -1,4 +1,5 @@
 import StyledRegistration from "../Styles/StyledRegistration";
+import { Link } from "react-router-dom";
 
 export default function Registration() {
   return (

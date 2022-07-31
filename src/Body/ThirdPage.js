@@ -2,13 +2,41 @@ import StyledTitle from "../Styles/StyledTitle";
 import StyledBody from "../Styles/StyledBody";
 import SeatsContainer from "../Styles/SeatsContainer";
 import StyledChooseSeat from "../Styles/StyledChooseSeat";
-import StyledSelected from "../Styles/StyledSelected";
 import Registration from "./Registration";
 import Page3Footer from "../Footer/Page3Footer";
+import SeatsAvailable from "./SeatsAvailable";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function ThirdPage() {
-  const color = "#c3cfd9";
-  const borderColor = "#1AAE9E";
+  const [color, setColor] = useState("#c3cfd9");
+  const [borderColor, setBorderColor] = useState("#808F9D");
+  const { idSessao } = useParams();
+  const [items, setItems] = useState(null);
+
+  useEffect(() => {
+    const promise = axios.get(
+      `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`
+    );
+    promise.then((res) => {
+      setItems(res.data);
+    });
+  }, []);
+
+  if (items === null) {
+    return "Loading";
+  }
+
+  function selectSeat() {
+    if (color === "#c3cfd9") {
+      setColor("#8DD7CF");
+      setBorderColor("#45BDB0");
+    } else {
+      setColor("#c3cfd9");
+      setBorderColor("#808F9D");
+    }
+  }
 
   return (
     <StyledBody>
@@ -17,38 +45,38 @@ export default function ThirdPage() {
       </StyledTitle>
       <SeatsContainer>
         <div>
-          <StyledChooseSeat color={color} borderColor="#808F9D">
-            <h3>01</h3>
-          </StyledChooseSeat>
-
-          <StyledChooseSeat color={color} borderColor="#808F9D">
-            <h3>02</h3>
-          </StyledChooseSeat>
-
-          <StyledChooseSeat color={color} borderColor="#808F9D">
-            <h3>03</h3>
-          </StyledChooseSeat>
+          {items.seats.map((item, index) => {
+            return item.isAvailable ? (
+              <StyledChooseSeat
+                onClick={selectSeat}
+                key={index}
+                color={color}
+                borderColor={borderColor}
+              >
+                <h3>{item.name}</h3>
+              </StyledChooseSeat>
+            ) : (
+              <StyledChooseSeat
+                onClick={() => alert("Esse assento não está disponível")}
+                key={index}
+                color="#FBE192"
+                borderColor="#F7C52B"
+              >
+                <h3>{item.name}</h3>
+              </StyledChooseSeat>
+            );
+          })}
         </div>
-        <section>
-          <div>
-            <StyledSelected color="#8dd7cf" borderColor={borderColor} />
-            <h4>Selecionado</h4>
-          </div>
-
-          <div>
-            <StyledSelected color="#C3CFD9" borderColor="#7B8B99" />
-            <h4>Disponível</h4>
-          </div>
-
-          <div>
-            <StyledSelected color="#FBE192" borderColor="#F7C52B" />
-            <h4>Indisponível</h4>
-          </div>
-        </section>
+        <SeatsAvailable />
       </SeatsContainer>
 
       <Registration />
-      <Page3Footer />
+      <Page3Footer
+        url={items.movie.posterURL}
+        title={items.movie.title}
+        day={items.day.weekday}
+        time={items.name}
+      />
     </StyledBody>
   );
 }

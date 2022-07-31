@@ -5,6 +5,7 @@ import StyledBody from "../Styles/StyledBody";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import LoadingImg from "../Styles/LoadingImg";
 import axios from "axios";
 
 export default function SecondPage() {
@@ -22,9 +23,13 @@ export default function SecondPage() {
   }, []);
 
   if (items === null) {
-    return <img src="https://bit.ly/3cVOjK1" alt="Loading" />;
+    return (
+      <LoadingImg>
+        <img src="https://bit.ly/3S8He93" alt="Loading" />
+      </LoadingImg>
+    );
   }
-  console.log(items);
+
   return (
     <>
       <StyledBody>

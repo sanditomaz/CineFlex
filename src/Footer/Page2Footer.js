@@ -1,7 +1,6 @@
 import Styled2Footer from "../Styles/Styled2Footer";
 
 export default function Page2Footer({ title, url }) {
-  console.log(url);
   return (
     <Styled2Footer>
       <div>
