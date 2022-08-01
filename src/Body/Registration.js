@@ -1,14 +1,15 @@
 import StyledRegistration from "../Styles/StyledRegistration";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
 export default function Registration({ place, title, day, time, idSeat }) {
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
+  let navigate = useNavigate();
 
   function register(e) {
-    console.log(e);
+    console.log("entrou");
     e.preventDefault();
     const body = {
       ids: idSeat,
@@ -19,6 +20,9 @@ export default function Registration({ place, title, day, time, idSeat }) {
     const promise = axios.post(
       "https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many",
       body
+    );
+    promise.then(
+      navigate("/sucesso", { state: { cpf, nome, place, title, day, time } })
     );
   }
 
@@ -45,13 +49,12 @@ export default function Registration({ place, title, day, time, idSeat }) {
           onChange={(e) => setCpf(e.target.value)}
         ></input>
       </section>
-      <Link to="/sucesso" state={{ cpf, nome, place, title, day, time }}>
-        <nav>
-          <button type="submit" value="submit">
-            Reservar Assento(s)
-          </button>
-        </nav>
-      </Link>
+
+      <nav>
+        <button type="submit" value="submit">
+          Reservar Assento(s)
+        </button>
+      </nav>
     </StyledRegistration>
   );
 }
