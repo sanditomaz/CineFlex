@@ -42,7 +42,8 @@ export default function Registration({ place, title, day, time, idSeat }) {
       <section>
         <div>CPF do comprador:</div>
         <input
-          type="number"
+          type="text"
+          pattern="[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}"
           required
           value={cpf}
           placeholder="Digite seu CPF..."
