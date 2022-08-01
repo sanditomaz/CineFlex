@@ -19,7 +19,7 @@ export default function Registration({ place, title, day, time, idSeat }) {
       name: nome,
       cpf: cpf,
     };
-    console.log(body);
+
     const promise = axios.post(
       "https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many",
       body

@@ -27,7 +27,6 @@ export default function ThirdPage() {
   if (items === null) {
     return "Loading";
   }
-  console.log(idSeat);
 
   return (
     <StyledBody>
@@ -55,7 +54,7 @@ export default function ThirdPage() {
       <Registration
         place={place}
         title={items.movie.title}
-        day={items.day.weekday}
+        day={items.day.date}
         time={items.name}
         idSeat={idSeat}
       />
