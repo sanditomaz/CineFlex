@@ -9,8 +9,11 @@ export default function Registration({ place, title, day, time, idSeat }) {
   let navigate = useNavigate();
 
   function register(e) {
-    console.log("entrou");
     e.preventDefault();
+    if (idSeat.length === 0) {
+      alert("Selecione um assento");
+      return;
+    }
     const body = {
       ids: idSeat,
       name: nome,
