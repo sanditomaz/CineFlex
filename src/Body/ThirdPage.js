@@ -12,6 +12,8 @@ import axios from "axios";
 export default function ThirdPage() {
   const { idSessao } = useParams();
   const [items, setItems] = useState(null);
+  const [place, setPlace] = useState([]);
+  const [idSeat, setIdSeat] = useState([]);
 
   useEffect(() => {
     const promise = axios.get(
@@ -25,6 +27,7 @@ export default function ThirdPage() {
   if (items === null) {
     return "Loading";
   }
+  console.log(idSeat);
 
   return (
     <StyledBody>
@@ -38,13 +41,24 @@ export default function ThirdPage() {
               key={index}
               seats={item.isAvailable}
               name={item.name}
+              idAssento={item.id}
+              emptyIdArray={idSeat}
+              setIdSeat={setIdSeat}
+              place={place}
+              setPlace={setPlace}
             />
           ))}
         </div>
         <SeatsAvailable />
       </SeatsContainer>
 
-      <Registration />
+      <Registration
+        place={place}
+        title={items.movie.title}
+        day={items.day.weekday}
+        time={items.name}
+        idSeat={idSeat}
+      />
       <Page3Footer
         url={items.movie.posterURL}
         title={items.movie.title}
@@ -55,7 +69,15 @@ export default function ThirdPage() {
   );
 }
 
-function RenderSeats({ seats, name }) {
+function RenderSeats({
+  seats,
+  name,
+  place,
+  setPlace,
+  idAssento,
+  emptyIdArray,
+  setIdSeat,
+}) {
   const [color, setColor] = useState("#c3cfd9");
   const [borderColor, setBorderColor] = useState("#808F9D");
 
@@ -63,9 +85,17 @@ function RenderSeats({ seats, name }) {
     if (color === "#c3cfd9") {
       setColor("#8DD7CF");
       setBorderColor("#45BDB0");
+      const newPlaces = [...place, name];
+      setPlace(newPlaces);
+      const newidSeats = [...emptyIdArray, idAssento];
+      setIdSeat(newidSeats);
     } else {
       setColor("#c3cfd9");
       setBorderColor("#808F9D");
+      const filtered = place.filter((value) => value !== name);
+      setPlace(filtered);
+      const filtId = emptyIdArray.filter((value) => value !== idAssento);
+      setIdSeat(filtId);
     }
   }
 

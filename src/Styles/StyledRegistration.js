@@ -10,9 +10,6 @@ const StyledRegistration = styled.form`
   gap: 15px;
   padding-bottom: 40px;
 
-  section {
-  }
-
   div {
     font-size: 18px;
     font-weight: 400;
